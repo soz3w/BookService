@@ -6,12 +6,20 @@
     <h1>BookService</h1>
 </div>
 
+<p class="col-md-12">
+    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">
+        Add Book
+    </button>
+</p>
 <div class="row">
 
-    <div class="col-md-4">
+    <div class="col-md-6">
+
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h2 class="panel-title">Books</h2>
+
+
             </div>
             <div class="panel-body">
                 <ul class="list-unstyled" data-bind="foreach: books">
@@ -25,65 +33,77 @@
         <div class="alert alert-danger" data-bind="visible: error"><p data-bind="text: error"></p></div>
     </div>
 
-   
-        <!-- ko if:detail() -->
 
-        <div class="col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h2 class="panel-title">Detail</h2>
-                </div>
-                <table class="table">
-                    <tr><td>Author</td><td data-bind="text: detail().AuthorName"></td></tr>
-                    <tr><td>Title</td><td data-bind="text: detail().Title"></td></tr>
-                    <tr><td>Year</td><td data-bind="text: detail().Year"></td></tr>
-                    <tr><td>Genre</td><td data-bind="text: detail().Genre"></td></tr>
-                    <tr><td>Price</td><td data-bind="text: detail().Price"></td></tr>
-                </table>
-            </div>
-        </div>
+    <!-- ko if:detail() -->
 
-        <!-- /ko -->
-  
-
-    <div class="col-md-4">
+    <div class="col-md-6">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h2 class="panel-title">Add Book</h2>
+                <h2 class="panel-title">Detail</h2>
             </div>
+            <table class="table">
+                <tr><td>Author</td><td data-bind="text: detail().AuthorName"></td></tr>
+                <tr><td>Title</td><td data-bind="text: detail().Title"></td></tr>
+                <tr><td>Year</td><td data-bind="text: detail().Year"></td></tr>
+                <tr><td>Genre</td><td data-bind="text: detail().Genre"></td></tr>
+                <tr><td>Price</td><td data-bind="text: detail().Price"></td></tr>
+            </table>
+        </div>
+    </div>
 
-            <div class="panel-body">
-                <form class="form-horizontal" data-bind="submit: addBook">
-                    <div class="form-group">
-                        <label for="inputAuthor" class="col-sm-2 control-label">Author</label>
-                        <div class="col-sm-10">
-                            <select data-bind="options:authors, optionsText: 'Name', value: newBook.Author"></select>
+    <!-- /ko -->
+    <!-- Modal dialog -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        Add a new book
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="inputAuthor" class="col-sm-2 control-label">Author</label>
+                            <div class="col-sm-10">
+                                <select data-bind="options:authors, optionsText: 'Name', value: newBook.Author"></select>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group" data-bind="with: newBook">
-                        <label for="inputTitle" class="col-sm-2 control-label">Title</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputTitle" data-bind="value:Title" />
-                        </div>
+                        <div class="form-group" data-bind="with: newBook">
+                            <label for="inputTitle" class="col-sm-2 control-label">Title</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputTitle" data-bind="value:Title" />
+                            </div>
 
-                        <label for="inputYear" class="col-sm-2 control-label">Year</label>
-                        <div class="col-sm-10">
-                            <input type="number" class="form-control" id="inputYear" data-bind="value:Year" />
-                        </div>
+                            <label for="inputYear" class="col-sm-2 control-label">Year</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="inputYear" data-bind="value:Year" />
+                            </div>
 
-                        <label for="inputGenre" class="col-sm-2 control-label">Genre</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputGenre" data-bind="value:Genre" />
-                        </div>
+                            <label for="inputGenre" class="col-sm-2 control-label">Genre</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputGenre" data-bind="value:Genre" />
+                            </div>
 
-                        <label for="inputPrice" class="col-sm-2 control-label">Price</label>
-                        <div class="col-sm-10">
-                            <input type="number" step="any" class="form-control" id="inputPrice" data-bind="value:Price" />
+                            <label for="inputPrice" class="col-sm-2 control-label">Price</label>
+                            <div class="col-sm-10">
+                                <input type="number" step="any" class="form-control" id="inputPrice" data-bind="value:Price" />
+                            </div>
                         </div>
-                    </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </form>
+                        <button data-bind="click: addBook" data-dismiss="modal" type="submit" class="btn btn-default">Submit</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"> Cancel </button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+
+                </div>
+
             </div>
         </div>
     </div>
