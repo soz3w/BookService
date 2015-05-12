@@ -42,16 +42,17 @@ namespace BookService.Controllers
             //{
             //    return NotFound();
             //}
-           var book = await db.Books.Include(b => b.Author).Select(b =>
-           new BookDetailDTO()
-           {
-               Id = b.Id,
-               Title = b.Title,
-               Year = b.Year,
-               Price = b.Price,
-               AuthorName = b.Author.Name,
-               Genre = b.Genre
-           }).SingleOrDefaultAsync(b => b.Id == id);
+            var book = await db.Books.Include(b => b.Author).Select(b =>
+            new BookDetailDTO()
+            {
+                Id = b.Id,
+                Title = b.Title,
+                Year = b.Year,
+                Price = b.Price,
+                AuthorName = b.Author.Name,
+                Genre = b.Genre,
+                AuthorId = b.AuthorId
+            }).SingleOrDefaultAsync(b => b.Id == id);
             if (book == null)
             {
                 return NotFound();
@@ -127,6 +128,9 @@ namespace BookService.Controllers
         [ResponseType(typeof(Book))]
         public async Task<IHttpActionResult> DeleteBook(int id)
         {
+
+
+
             Book book = await db.Books.FindAsync(id);
             if (book == null)
             {
@@ -135,6 +139,8 @@ namespace BookService.Controllers
 
             db.Books.Remove(book);
             await db.SaveChangesAsync();
+
+
 
             return Ok(book);
         }
